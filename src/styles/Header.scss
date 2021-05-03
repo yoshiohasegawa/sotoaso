@@ -1,0 +1,42 @@
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    padding: 1vh;
+    margin: 1vh;
+    min-height: 5vh;
+    border-style: solid;
+    border-color: black;
+}
+
+.site-logo-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-style: solid;
+    border-color: black;
+    width: 25%;
+}
+
+.site-logo {
+}
+
+.enter-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    border-style: solid;
+    border-color: black;
+    width: 25%;
+}
+
+@media (max-width: 600px) {
+    .enter-container {
+        width: 50%;
+    }
+}
+
+.login-button {
+}
+
+.signup-button {
+}
