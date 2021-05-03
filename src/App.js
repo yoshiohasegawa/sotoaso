@@ -2,7 +2,7 @@ import axios from "axios";
 
 
 async function getData() {
-  const resp = await axios.get("/world");
+  const resp = await axios.get("/api/users");
   console.log(resp.data);
   return resp.data;
 }

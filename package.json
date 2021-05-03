@@ -18,12 +18,15 @@
     "web-vitals": "^1.1.1"
   },
   "scripts": {
-    "start": "node server",
+    "start": "node index.js",
     "dev": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "server": "nodemon -r dotenv/config server"
+    "server": "nodemon -r dotenv/config",
+    "migrate": "node -r dotenv/config ./node_modules/knex/bin/cli.js migrate:latest --knexfile db/knexfile.js",
+    "rollback": "node -r dotenv/config ./node_modules/knex/bin/cli.js migrate:rollback --knexfile db/knexfile.js",
+    "seed": "node -r dotenv/config ./node_modules/knex/bin/cli.js seed:run --knexfile db/knexfile.js"
   },
   "eslintConfig": {
     "extends": [
@@ -49,5 +52,5 @@
     "mocha": "^8.3.2",
     "nodemon": "^2.0.7"
   },
-  "proxy": "http://localhost:9000/"
+  "proxy": "http://localhost:9000"
 }
