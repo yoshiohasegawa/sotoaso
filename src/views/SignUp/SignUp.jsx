@@ -35,7 +35,7 @@ export default function SignUp() {
 
 
     return (
-        <div className="sign-up-container"></div>
+        <div className="sign-up-container">
             <h1> Sign Up Page </h1>
             <form>
                 <label htmlFor="sign-up-email">Email: </label>
