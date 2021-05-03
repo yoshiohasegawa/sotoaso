@@ -1,3 +1,14 @@
+import axios from "axios";
+
+
+async function getData() {
+  const resp = await axios.get("/world");
+  console.log(resp.data);
+  return resp.data;
+}
+
+getData();
+
 function App() {
   return (
     <div className="App">
