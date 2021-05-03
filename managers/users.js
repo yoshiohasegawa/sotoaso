@@ -15,8 +15,9 @@ class UserManager {
         const user = await db("users").where({username: req.body.username}).first();
         if (user) {
             if (await bcrypt.compare(req.body.password, user.password)) {
-                jwt.sign(user, process.env.REACT_APP_ACCESS_TOKEN_SECRET);
-                return user;
+                const accessToken = jwt.sign(user, process.env.REACT_APP_ACCESS_TOKEN_SECRET);
+                const response = {email: user.email, username: user.username, accessToken};
+                return response;
             }
             return "Wrong Password";
         }

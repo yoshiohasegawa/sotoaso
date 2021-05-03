@@ -18,10 +18,10 @@ export default function Login() {
     }
 
     async function loginUser() {
-        console.log(`Logging In ${username} ...`)
+        console.log(`Logging in ${username} ...`)
         try {
             const res = await axios.post("/api/users/login", {username, password})
-            console.log(`${res.data.username} Logged In!`);
+            console.log(`${res.data.username} logged In!`);
             usernameInput.current.value = "";
             passwordInput.current.value = "";
             setUsername("");

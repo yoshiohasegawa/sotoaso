@@ -25,7 +25,7 @@ export default function SignUp() {
     }
 
     async function postUser() {
-        console.log(`Posting ${username} ...`)
+        console.log(`Creating new user: ${username} ...`)
         const res = await axios.post("/api/users/", {email, username, password})
         console.log(`${res.data.username} created!`);
         emailInput.current.value = "";

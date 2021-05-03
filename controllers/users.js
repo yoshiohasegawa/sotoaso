@@ -13,15 +13,15 @@ class UserController {
 
     async loginUser(req, res) {
         try {
-            const user = await UserManager.loginUser(req);
-            if (user === "Wrong Password") {
+            const response = await UserManager.loginUser(req);
+            if (response === "Wrong Password") {
                 res.status(403).send("Password is incorrect");
             }
-            if (user === "Not Found") {
+            if (response === "Not Found") {
                 res.status(404).send("Username is incorrect");
             }
-            if (user) {
-                res.send(user);
+            if (response) {
+                res.json(response);
             }
         } catch (err) {
             console.error(err);
