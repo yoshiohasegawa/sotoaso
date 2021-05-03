@@ -5,9 +5,9 @@ exports.up = async (knex) => {
 
   return knex.schema.createTable('users', table => {
     table.uuid('id').primary().defaultTo(knex.raw('uuid_generate_v4()'));
-    table.string('email').notNullable();
-    table.string('username').notNullable();
-    table.string('password').notNullable();
+    table.string('email')
+    table.string('username')
+    table.string('password')
     table.timestamps(true, true);
   })
 };

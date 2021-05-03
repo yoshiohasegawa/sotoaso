@@ -3,7 +3,7 @@ const usersController = require("../controllers/users");
 
 const router = express.Router();
 
-router.unsubscribe(express.json());
-router.get("/", usersController.getUsers);
+router.use(express.json());
+router.post("/", usersController.postUser);
 
 module.exports = router;

@@ -1,10 +1,11 @@
-const usersService = require("../services/users");
+const UserManager = require("../managers/users");
 
 class UserController {
-    async getUsers(req, res) {
+    async postUser(req, res) {
+        console.log(`Posting: ${JSON.stringify(req.body)}`);
         try {
-            const users = await usersService.getUsers(req);
-             res.send(users);
+            const user = await UserManager.postUser(req);
+             console.log(`Response: ${user}`)
         } catch (err) {
             console.error(err);
             res.status(500).end();

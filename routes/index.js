@@ -6,8 +6,7 @@ const app = express();
 
 // Serve static assets
 app.use(express.static(path.resolve(__dirname, "..", "build")));
-
-// Route for /api
+// Route for /api/users
 app.use("/api/users", usersRouter);
 
 module.exports = app;
