@@ -6,9 +6,9 @@ module.exports = {
     client: 'postgresql',
       connection: {
         host: '127.0.0.1', // Local host
-        user: process.env.DB_USER,
-        password: process.env.DB_PW,
-        database: process.env.DB_NAME
+        user: process.env.REACT_APP_DB_USER,
+        password: process.env.REACT_APP_DB_PW,
+        database: process.env.REACT_APP_DB_NAME
       },
       pool: {
         min: 2,

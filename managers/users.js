@@ -1,5 +1,6 @@
 const db = require("../db/db");
 const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 
 class UserManager {
     async postUser(req) {
@@ -14,6 +15,7 @@ class UserManager {
         const user = await db("users").where({username: req.body.username}).first();
         if (user) {
             if (await bcrypt.compare(req.body.password, user.password)) {
+                jwt.sign(user, process.env.REACT_APP_ACCESS_TOKEN_SECRET);
                 return user;
             }
             return "Wrong Password";
