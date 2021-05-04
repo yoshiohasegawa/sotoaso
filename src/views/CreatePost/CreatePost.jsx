@@ -21,9 +21,9 @@ export default function CreatePost({ history }) {
     const [activity, setActivity] = useState({});
     const [title, setTitle] = useState("");
     const [body, setBody] = useState("");
-    const [activityBlank, setActivityBlank] = useState(false);
-    const [titleBlank, setTitleBlank] = useState(false);
-    const [bodyBlank, setBodyBlank] = useState(false);
+    const [activityBlank, setActivityBlank] = useState();
+    const [titleBlank, setTitleBlank] = useState();
+    const [bodyBlank, setBodyBlank] = useState();
     const titleInput = useRef();
     const bodyInput = useRef();
     const userId = useSelector(state => state.userId);
@@ -51,7 +51,7 @@ export default function CreatePost({ history }) {
 
     async function handlePost(e) {
         e.preventDefault();
-        if (activity.name === "Activity") {
+        if (activity.name === "Activity" || !activity.name) {
             setActivityBlank(true);
         } else {
             setActivityBlank(false);
@@ -67,7 +67,7 @@ export default function CreatePost({ history }) {
             setBodyBlank(false);
         }
 
-        if (!activityBlank && !titleBlank && !bodyBlank) {
+        if (activityBlank !== undefined && !activityBlank && !titleBlank && !bodyBlank) {
             console.log(`Creating post ...`)
             const res = await axios.post("/api/posts", {
                 title,
