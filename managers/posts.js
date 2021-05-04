@@ -4,19 +4,14 @@ class PostManager {
     async getPosts(req) {
         const {postId} = req.params;
         if (postId) {
-            const post = await db('posts')
-                .join('activity_types',
-                      'activity_types.id',
-                      'posts.activity_type')
-                .select('posts.*', 'activity_types.name')
-                .where({id: postId});
+            const post = await db('posts').where({id: postId}).first();
             return post;
         }
         const posts = await db('posts')
             .join('activity_types',
-                  'activity_types.id',
+                  'activity_types.id', 
                   'posts.activity_type')
-            .select('posts.*', 'activity_types.name');
+            .select('posts.*', 'activity_types.activity_name');
         return posts;
     };
 
