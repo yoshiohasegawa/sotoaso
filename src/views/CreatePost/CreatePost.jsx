@@ -67,7 +67,7 @@ export default function CreatePost({ history }) {
             setBodyBlank(false);
         }
 
-        if (activityBlank !== undefined && activityBlank && !titleBlank && !bodyBlank) {
+        if (activityBlank !== undefined && !activityBlank && !titleBlank && !bodyBlank) {
             console.log(`Creating post ...`)
             const res = await axios.post("/api/posts", {
                 title,

@@ -1,15 +1,17 @@
-// Update with your config settings.
+const { parse } = require("pg-connection-string");
+
+let pgconfig;
+
+if (process.env.DATABASE_URL) {
+  pgconfig = parse(process.env.DATABASE_URL);
+  pgconfig.ssl = { rejectUnauthorized: false };
+}
 
 module.exports = {
 
   development: {
     client: 'postgresql',
-      connection: {
-        host: '127.0.0.1', // Local host
-        user: process.env.REACT_APP_DB_USER,
-        password: process.env.REACT_APP_DB_PW,
-        database: process.env.REACT_APP_DB_NAME
-      },
+      connection: pgconfig || process.env.DATABASE_LOCAL_URL,
       pool: {
         min: 2,
         max: 10
