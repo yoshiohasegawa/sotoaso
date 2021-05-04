@@ -20,7 +20,7 @@
 .site-logo {
 }
 
-.enter-container {
+.interact-container {
     display: flex;
     align-items: center;
     justify-content: space-around;
@@ -30,7 +30,7 @@
 }
 
 @media (max-width: 600px) {
-    .enter-container {
+    .interact-container {
         width: 50%;
     }
 }

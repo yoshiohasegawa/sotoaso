@@ -3,10 +3,11 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
 class UserManager {
+    // TODO: Implement GET user/:id
     async getUser(req) {
-        console.log('GOT USER FROM DB!')
+        console.log('Warning: Still in development...')
         return;
-    }
+    };
 
     async postUser(req) {
         const salt = await bcrypt.genSalt();
@@ -14,7 +15,7 @@ class UserManager {
         const user = {email: req.body.email, username: req.body.username, password: hashed};
         const [createdUser] = await db("users").insert(user).returning(["email", "username"]);
         return createdUser;
-    }
+    };
 
     async loginUser(req) {
         const user = await db("users").where({username: req.body.username}).first();
@@ -27,7 +28,7 @@ class UserManager {
             return {email: user.email, username: user.username, auth: false, message: "Wrong password"};
         }
         return {auth: false, message: "User not found"};
-    }
+    };
 }
 
 module.exports = new UserManager();

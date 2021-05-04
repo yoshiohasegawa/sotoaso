@@ -5,6 +5,7 @@ import Feed from "./views/Feed/Feed";
 import Login from "./views/Login/Login";
 import SignUp from "./views/SignUp/SignUp";
 import CreatePost from "./views/CreatePost/CreatePost";
+import Logout from "./views/Logout/Logout";
 import PostDetail from "./views/PostDetail/PostDetail";
 
 export default function App() {
@@ -14,10 +15,12 @@ export default function App() {
         <Header />
         <Switch>
           <Route path="/" exact component={Feed} />
-          <Route path="/login" component={Login} />
-          <Route path="/signup" component={SignUp} />
-          <Route path="/create-post" component={CreatePost} />
-          <Route path="/post/:id" component={PostDetail} />
+          <Route path="/login" exact component={Login} />
+          <Route path="/signup" exact component={SignUp} />
+          <Route path="/create-post" exact component={CreatePost} />
+          <Route path="/logout" exact component={Logout} />
+          <Route path="/post/:id" exact component={PostDetail} />
+          <Route path="*" component={() => (<h1 className="404">404 NOT FOUND</h1>)}/>
         </Switch>
       </div>
     </Router>

@@ -9,12 +9,12 @@ class UserController {
             console.error(err);
             res.status(500).end();
         }
-    }
+    };
 
     async postUser(req, res) {
         try {
             const createdUser = await UserManager.postUser(req);
-            res.send(createdUser);
+            res.status(200).send(createdUser);
         } catch (err) {
             console.error(err);
             res.status(500).end();
@@ -35,6 +35,16 @@ class UserController {
                     maxAge: 60*60*24*30*1000, httpOnly: true}) // seconds*minutes*hours*days*miliseconds
                 res.status(200).json(response);
             }
+        } catch (err) {
+            console.error(err);
+            res.status(500).end();
+        }
+    };
+
+    async logoutUser(req, res) {
+        try {
+            res.clearCookie("access-token");
+            res.status(200).end();
         } catch (err) {
             console.error(err);
             res.status(500).end();
