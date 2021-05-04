@@ -50,7 +50,7 @@ export default function SignUp({ history }) {
 
     return (
         <div className="sign-up-container">
-            <h1> Sign Up Page </h1>
+            <h1> Please sign-up </h1>
             <form>
                 <label htmlFor="sign-up-email">Email: </label>
                 <input id="sign-up-email" ref={emailInput} type="text" placeholder="Email" onChange={updateEmail}></input>

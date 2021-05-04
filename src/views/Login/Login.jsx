@@ -46,7 +46,7 @@ export default function Login({ history }) {
 
     return (
         <div className="login-container">
-            <h1> Login Page </h1>
+            <h1> Please login </h1>
             <form>
                 <label htmlFor="login-username">Username: </label>
                 <input id="login-username" ref={usernameInput} type="text" placeholder="Username" onChange={updateUsername}></input>

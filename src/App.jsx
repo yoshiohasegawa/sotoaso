@@ -7,6 +7,7 @@ import SignUp from "./views/SignUp/SignUp";
 import CreatePost from "./views/CreatePost/CreatePost";
 import Logout from "./views/Logout/Logout";
 import PostDetail from "./views/PostDetail/PostDetail";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 export default function App() {
   return (
@@ -17,7 +18,7 @@ export default function App() {
           <Route path="/" exact component={Feed} />
           <Route path="/login" exact component={Login} />
           <Route path="/signup" exact component={SignUp} />
-          <Route path="/create-post" exact component={CreatePost} />
+          <ProtectedRoute path="/create-post" exact component={CreatePost} />
           <Route path="/logout" exact component={Logout} />
           <Route path="/post/:id" exact component={PostDetail} />
           <Route path="*" component={() => (<h1 className="404">404 NOT FOUND</h1>)}/>
