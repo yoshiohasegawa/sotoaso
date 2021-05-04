@@ -21,7 +21,8 @@ class UserManager {
         const user = await db("users").where({username: req.body.username}).first();
         if (user) {
             if (await bcrypt.compare(req.body.password, user.password)) {
-                const accessToken = jwt.sign(user, process.env.REACT_APP_ACCESS_TOKEN_SECRET, {expiresIn: 300});
+                // TODO: Create a refresh token & tell user when accessToken is no longer valid
+                const accessToken = jwt.sign(user, process.env.REACT_APP_ACCESS_TOKEN_SECRET, {expiresIn: 600});
                 const response = {id: user.id, email: user.email, username: user.username, accessToken, auth: true};
                 return response;
             }
