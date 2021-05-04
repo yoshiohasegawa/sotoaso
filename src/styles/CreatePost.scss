@@ -1,0 +1,45 @@
+.create-post-container {
+    display:flex;
+    flex-direction: column;
+    padding: 1vh;
+    margin: 1vh;
+    min-height: 5vh;
+    border-style: solid;
+    border-color: black;
+}
+
+#activity-select {
+    margin: 1vh;
+}
+
+.create-post-form {
+    display: flex;
+    justify-content: space-between;
+    padding: 1vh;
+    margin: 1vh;
+}
+
+.create-post-label {
+    margin: auto;
+    padding: 1vh;
+    font-size: 1.3em;
+}
+
+.create-post-input {
+    width: 85vw;
+}
+
+#create-post-body {
+    height: 25vh;
+}
+
+.missing-container {
+    text-align: center;
+    height: min-content;
+    background-color: rgba(255, 0, 0, 0.4);
+}
+
+.create-post-missing {
+    vertical-align:middle;
+    color: red;
+}
