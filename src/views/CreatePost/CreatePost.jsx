@@ -41,16 +41,19 @@ export default function CreatePost({ history }) {
 
     function updateTitle(e) {
         e.preventDefault();
-        setTitle(e.target.value);
+        const updatedTitle = e.target.value;
+        setTitle(updatedTitle);
     }
 
     function updateBody(e) {
         e.preventDefault();
-        setBody(e.target.value);
+        const updatedBody = e.target.value;
+        setBody(updatedBody);
     }
 
-    async function handlePost(e) {
+    function handlePost(e) {
         e.preventDefault();
+        console.log('Clicked Post ...');
         if (activity.name === "Activity" || !activity.name) {
             setActivityBlank(true);
         } else {
@@ -66,8 +69,11 @@ export default function CreatePost({ history }) {
         } else {
             setBodyBlank(false);
         }
-
-        if (activityBlank !== undefined && !activityBlank && !titleBlank && !bodyBlank) {
+        postPost();
+    };
+    
+    async function postPost() {
+        if (activityBlank === false && titleBlank === false && bodyBlank === false) {
             console.log(`Creating post ...`)
             const res = await axios.post("/api/posts", {
                 title,
@@ -97,10 +103,10 @@ export default function CreatePost({ history }) {
                     {activities.map((activity) => {
                         return (
                             <option
-                                value={activity.name}
+                                value={activity.activity_name}
                                 key={activity.id} 
                                 data-key={activity.id}>
-                                    {activity.name}
+                                    {activity.activity_name}
                             </option>
                         );
                     })}
