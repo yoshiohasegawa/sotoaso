@@ -1,23 +1,26 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { logout } from "../../actions";
+import { logout, removeUserId } from "../../actions";
 import axios from "axios";
 
 export default function Logout({ history }) {
     const dispatch = useDispatch();
 
     async function logoutUser() {
-        console.log(`Logging you out...`)
+        console.log(`Logging you out...`);
         try {
-            const res = await axios.post("/api/users/logout")
+            const res = await axios.post("/api/users/logout");
             console.log("logged out!");
             if (res.status === 200) {
                 // set store.authentication = false
+                // set store.userId = ""
                 dispatch(logout());
-                // TODO: remove after authentication on page reload
+                dispatch(removeUserId());
+                // TODO: remove after resolving on page reload
                 // is successfully done with cookies
-                localStorage.removeItem("access-token")
-                history.push("/")
+                localStorage.removeItem("access-token");
+                localStorage.removeItem("user-id");
+                history.push("/");
             }
         } catch (err) {
             console.error(err);

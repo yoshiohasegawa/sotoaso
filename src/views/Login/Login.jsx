@@ -1,6 +1,6 @@
 import React, { useState, useRef } from "react";
 import { useDispatch } from "react-redux";
-import { login } from "../../actions";
+import { login, saveUserId } from "../../actions";
 import axios from "axios";
 
 export default function Login({ history }) {
@@ -24,20 +24,21 @@ export default function Login({ history }) {
         console.log(`Logging in ${username} ...`)
         try {
             const res = await axios.post("/api/users/login", {username, password})
-            console.log(`${res.data.username} logged In!`);
-            usernameInput.current.value = "";
-            passwordInput.current.value = "";
-            setUsername("");
-            setPassword("");
             if (res.data.auth) {
+                console.log(`${res.data.username} logged In!`);
+                usernameInput.current.value = "";
+                passwordInput.current.value = "";
                 // set store.authentication = true
+                // set store.userId = res.data.id
                 dispatch(login());
-                // TODO: remove and authenticate with cookies on page reload
+                dispatch(saveUserId(res.data.id));
+                // TODO: remove and resolve with cookies on page reload
                 localStorage.setItem("access-token", res.data.accessToken);
+                localStorage.setItem("user-id", res.data.id);
                 history.push("/")
             }
         } catch (err) {
-            console.error(err.response.data.message);
+            console.error("Something went wrong ...");
         }
     }
 

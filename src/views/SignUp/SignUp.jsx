@@ -39,7 +39,7 @@ export default function SignUp({ history }) {
                 history.push("/login")
             }
         } catch (err) {
-            console.error("Something went wrong...");
+            console.error("Something went wrong ...");
         }
     }
 

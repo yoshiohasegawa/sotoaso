@@ -39,6 +39,19 @@
 }
 
 #create-post-body {
-  height: 30vh;
+  height: 25vh;
+}
+
+.missing-container {
+  text-align: center;
+  height: -webkit-min-content;
+  height: -moz-min-content;
+  height: min-content;
+  background-color: rgba(255, 0, 0, 0.4);
+}
+
+.create-post-missing {
+  vertical-align: middle;
+  color: red;
 }
 /*# sourceMappingURL=CreatePost.css.map */

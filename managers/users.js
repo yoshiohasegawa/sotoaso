@@ -22,7 +22,7 @@ class UserManager {
         if (user) {
             if (await bcrypt.compare(req.body.password, user.password)) {
                 const accessToken = jwt.sign(user, process.env.REACT_APP_ACCESS_TOKEN_SECRET, {expiresIn: 300});
-                const response = {email: user.email, username: user.username, accessToken, auth: true};
+                const response = {id: user.id, email: user.email, username: user.username, accessToken, auth: true};
                 return response;
             }
             return {email: user.email, username: user.username, auth: false, message: "Wrong password"};

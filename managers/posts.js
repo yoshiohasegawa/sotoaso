@@ -8,7 +8,7 @@ class PostManager {
                 .join('activity_types',
                       'activity_types.id',
                       'posts.activity_type')
-                .select('posts.*', 'activity_types.type')
+                .select('posts.*', 'activity_types.name')
                 .where({id: postId});
             return post;
         }
@@ -16,7 +16,7 @@ class PostManager {
             .join('activity_types',
                   'activity_types.id',
                   'posts.activity_type')
-            .select('posts.*', 'activity_types.type');
+            .select('posts.*', 'activity_types.name');
         return posts;
     };
 
