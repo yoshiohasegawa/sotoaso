@@ -37,7 +37,7 @@ class UserController {
             }
         } catch (err) {
             console.error(err);
-            res.status(500).end();
+            res.status(500).send({message: "Something went wrong..."});
         }
     };
 

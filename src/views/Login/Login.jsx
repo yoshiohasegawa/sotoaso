@@ -38,7 +38,7 @@ export default function Login({ history }) {
                 history.push("/")
             }
         } catch (err) {
-            console.error("Something went wrong ...");
+            console.error(err.response.data.message);
         }
     }
 
