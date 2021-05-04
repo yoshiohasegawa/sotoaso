@@ -1,7 +1,7 @@
 // TODO: authenticate user with cookies on page reload
 let userAuthorized;
 const accessToken = localStorage.getItem("access-token");
-if (accessToken !== "undefined") {
+if (accessToken !== "undefined" && accessToken) {
     userAuthorized = true;
 } else {
     userAuthorized = false;
