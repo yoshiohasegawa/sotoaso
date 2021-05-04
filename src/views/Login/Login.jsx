@@ -1,13 +1,14 @@
 import React, { useState, useRef } from "react";
+import { useDispatch } from "react-redux";
+import { login, saveUserId } from "../../actions";
 import axios from "axios";
 
-export default function Login() {
+export default function Login({ history }) {
     const [username, setUsername] = useState();
     const [password, setPassword] = useState();
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
-    const [getUsername, setGetUsername] = useState();
     const usernameInput = useRef();
     const passwordInput = useRef();
+    const dispatch = useDispatch();
 
     function updateUsername(e) {
         e.preventDefault();
@@ -23,16 +24,21 @@ export default function Login() {
         console.log(`Logging in ${username} ...`)
         try {
             const res = await axios.post("/api/users/login", {username, password})
-            console.log(`${JSON.stringify(res.data.username)} logged In!`);
-            usernameInput.current.value = "";
-            passwordInput.current.value = "";
-            setUsername("");
-            setPassword("");
             if (res.data.auth) {
-                setIsLoggedIn(true);
+                console.log(`${res.data.username} logged In!`);
+                usernameInput.current.value = "";
+                passwordInput.current.value = "";
+                // set store.authentication = true
+                // set store.userId = res.data.id
+                dispatch(login());
+                dispatch(saveUserId(res.data.id));
+                // TODO: remove and resolve with cookies on page reload
+                localStorage.setItem("access-token", res.data.accessToken);
+                localStorage.setItem("user-id", res.data.id);
+                history.push("/")
             }
         } catch (err) {
-            console.error(err.response.data.message);
+            console.error("Something went wrong ...");
         }
     }
 
@@ -41,44 +47,16 @@ export default function Login() {
         loginUser();
     }
 
-    function updateGetUsername(e) {
-        e.preventDefault();
-        setGetUsername(e.target.value);
-    }
-
-    async function getUser() {
-        console.log(`Getting ${username} ...`)
-        try {
-            const res = await axios.get(`/api/users/${getUsername}`);
-            console.log(`Fetched ${res.data}`);
-        } catch (err) {
-            console.error(err.response.data.message);
-        }
-    }
-
-    function handleGetUsername(e) {
-        e.preventDefault();
-        getUser();
-    }
-
     return (
         <div className="login-container">
-            <h1> Login Page </h1>
-            {isLoggedIn ? (
-                <form>
-                <label htmlFor="get-username">Get User Info: </label>
-                <input id="get-username" type="text" placeholder="Username" onChange={updateGetUsername}></input>
-                <input id="get-username-submit" type="submit" value="Get" onClick={handleGetUsername}></input>
+            <h1> Please login </h1>
+            <form>
+                <label htmlFor="login-username">Username: </label>
+                <input id="login-username" ref={usernameInput} type="text" placeholder="Username" onChange={updateUsername}></input>
+                <label htmlFor="login-password">Password: </label>
+                <input id="login-password" ref={passwordInput} type="password" placeholder="Password" onChange={updatePassword}></input>
+                <input id="login-submit" type="submit" value="Login" onClick={handleLoginUser}></input>
             </form>
-            ) : (
-                <form>
-                    <label htmlFor="login-username">Email: </label>
-                    <input id="login-username" ref={usernameInput} type="text" placeholder="Username" onChange={updateUsername}></input>
-                    <label htmlFor="login-password">Email: </label>
-                    <input id="login-password" ref={passwordInput} type="text" placeholder="Password" onChange={updatePassword}></input>
-                    <input id="login-submit" type="submit" value="Login" onClick={handleLoginUser}></input>
-                </form>
-            )}
         </div>
     )
 }

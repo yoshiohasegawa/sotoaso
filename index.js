@@ -7,6 +7,8 @@ async function startServer() {
     try {
         console.log("Running migrations...");
         await db.migrate.latest();
+        console.log("Seeding database...");
+        await db.seed.run();
 
         console.log("Starting express server...")
         app.listen(PORT, () => {

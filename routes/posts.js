@@ -1,5 +1,5 @@
 const express = require("express");
-const userController = require("../controllers/users");
+const postController = require("../controllers/posts");
 // Verify user though accessing access-token in cookies
 const verifyUser = require("./auth");
 const cookieParser = require("cookie-parser");
@@ -8,9 +8,8 @@ const router = express.Router();
 
 router.use(express.json());
 router.use(cookieParser());
-router.get("/:id", verifyUser, userController.getUser);
-router.post("/signup", userController.postUser);
-router.post("/login", userController.loginUser)
-router.post("/logout", userController.logoutUser);
+router.get("/", postController.getPosts);
+router.get("/:postId", postController.getPosts);
+router.post("/", verifyUser, postController.postPost);
 
 module.exports = router;
