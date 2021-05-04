@@ -3,6 +3,11 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
 class UserManager {
+    async getUser(req) {
+        console.log('GOT USER FROM DB!')
+        return;
+    }
+
     async postUser(req) {
         const salt = await bcrypt.genSalt();
         const hashed = await bcrypt.hash(req.body.password, salt);
@@ -15,13 +20,13 @@ class UserManager {
         const user = await db("users").where({username: req.body.username}).first();
         if (user) {
             if (await bcrypt.compare(req.body.password, user.password)) {
-                const accessToken = jwt.sign(user, process.env.REACT_APP_ACCESS_TOKEN_SECRET);
-                const response = {email: user.email, username: user.username, accessToken};
+                const accessToken = jwt.sign(user, process.env.REACT_APP_ACCESS_TOKEN_SECRET, {expiresIn: 300});
+                const response = {email: user.email, username: user.username, accessToken, auth: true};
                 return response;
             }
-            return "Wrong Password";
+            return {email: user.email, username: user.username, auth: false, message: "Wrong password"};
         }
-        return "Not Found";
+        return {auth: false, message: "User not found"};
     }
 }
 

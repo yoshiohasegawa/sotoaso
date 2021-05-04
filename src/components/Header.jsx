@@ -2,9 +2,8 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "../styles/Header.css";
 
-// TODO: Render enter-container if not authenticated else,
-//       render create-post-container
 export default function Header() {
+
     return (
         <div className="header-container">
             <div className="site-logo-container">
