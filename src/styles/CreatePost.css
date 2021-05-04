@@ -1,0 +1,44 @@
+.create-post-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  padding: 1vh;
+  margin: 1vh;
+  min-height: 5vh;
+  border-style: solid;
+  border-color: black;
+}
+
+#activity-select {
+  margin: 1vh;
+}
+
+.create-post-form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  padding: 1vh;
+  margin: 1vh;
+}
+
+.create-post-label {
+  margin: auto;
+  padding: 1vh;
+  font-size: 1.3em;
+}
+
+.create-post-input {
+  width: 85vw;
+}
+
+#create-post-body {
+  height: 30vh;
+}
+/*# sourceMappingURL=CreatePost.css.map */

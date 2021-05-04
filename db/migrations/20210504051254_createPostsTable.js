@@ -8,7 +8,7 @@ exports.up = function(knex) {
           .onUpdate("CASCADE")
           .onDelete("CASCADE");
         table.string('body')
-        table.uuid('userId')
+        table.uuid('user_id')
           .unsigned()
           .references('users.id')
           .onUpdate("CASCADE")

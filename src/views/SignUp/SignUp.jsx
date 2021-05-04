@@ -35,7 +35,7 @@ export default function SignUp({ history }) {
             setEmail("");
             setUsername("");
             setPassword("");
-            if (res.status === 200) {
+            if (res.status === 201) {
                 history.push("/login")
             }
         } catch (err) {

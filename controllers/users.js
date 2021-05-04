@@ -14,7 +14,7 @@ class UserController {
     async postUser(req, res) {
         try {
             const createdUser = await UserManager.postUser(req);
-            res.status(200).send(createdUser);
+            res.status(201).send(createdUser);
         } catch (err) {
             console.error(err);
             res.status(500).end();
