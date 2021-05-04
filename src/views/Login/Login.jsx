@@ -29,9 +29,12 @@ export default function Login({ history }) {
             passwordInput.current.value = "";
             setUsername("");
             setPassword("");
+            console.log(res.data);
             if (res.data.auth) {
                 // set store.authentication = true
                 dispatch(login());
+                // TODO: remove and authenticate with cookies on page reload
+                localStorage.setItem("access-token", res.data.accessToken);
                 history.push("/")
             }
         } catch (err) {

@@ -14,6 +14,9 @@ export default function Logout({ history }) {
             if (res.status === 200) {
                 // set store.authentication = false
                 dispatch(logout());
+                // TODO: remove after authentication on page reload
+                // is successfully done with cookies
+                localStorage.removeItem("access-token")
                 history.push("/")
             }
         } catch (err) {
