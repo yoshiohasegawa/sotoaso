@@ -1,0 +1,21 @@
+.sign-up-form {
+    display: flex;
+    flex-direction: column;
+    margin: 1vh;
+    padding: 1vh;
+}
+
+.sign-up-label {
+    padding: 1vh;
+    font-size: 1.3em;
+}
+
+.sign-up-input {
+    margin: 1vh;
+    width: 30vw;
+}
+
+#sign-up-submit {
+    margin: 1vh;
+    width: fit-content;
+}

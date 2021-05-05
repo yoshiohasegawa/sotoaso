@@ -1,0 +1,21 @@
+.login-form {
+    display: flex;
+    flex-direction: column;
+    margin: 1vh;
+    padding: 1vh;
+}
+
+.login-label {
+    padding: 1vh;
+    font-size: 1.3em;
+}
+
+.login-input {
+    margin: 1vh;
+    width: 30vw;
+}
+
+#login-submit {
+    margin: 1vh;
+    width: fit-content;
+}

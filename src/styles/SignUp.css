@@ -1,0 +1,29 @@
+.sign-up-form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  margin: 1vh;
+  padding: 1vh;
+}
+
+.sign-up-label {
+  padding: 1vh;
+  font-size: 1.3em;
+}
+
+.sign-up-input {
+  margin: 1vh;
+  width: 30vw;
+}
+
+#sign-up-submit {
+  margin: 1vh;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+}
+/*# sourceMappingURL=SignUp.css.map */
