@@ -1,6 +1,10 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { logout } from "../../actions";
 import axios from "axios";
+// TODO: Implement PopUp for authFailed
+// import PopUp from "../PopUp/PopUp";
 import "../../styles/CreatePost.css";
 
 export default function CreatePost({ history }) {
@@ -18,7 +22,7 @@ export default function CreatePost({ history }) {
     }, [])
 
     const [activities, setActivities] = useState([]);
-    const [activity, setActivity] = useState({});
+    const [activity, setActivity] = useState({name: "Activity"});
     const [title, setTitle] = useState("");
     const [body, setBody] = useState("");
     const [activityBlank, setActivityBlank] = useState();
@@ -27,6 +31,8 @@ export default function CreatePost({ history }) {
     const titleInput = useRef();
     const bodyInput = useRef();
     const userId = useSelector(state => state.userId);
+    const dispatch = useDispatch();
+    const [authFailed, setAuthFailed] = useState(false);
 
     function updateActivity(e) {
         e.preventDefault();
@@ -37,48 +43,51 @@ export default function CreatePost({ history }) {
             name: e.target.value
         };
         setActivity(updatedActivity);
+        setActivityBlank(false);
     }
 
     function updateTitle(e) {
         e.preventDefault();
         const updatedTitle = e.target.value;
         setTitle(updatedTitle);
+        setTitleBlank(false);
     }
 
     function updateBody(e) {
         e.preventDefault();
         const updatedBody = e.target.value;
         setBody(updatedBody);
+        setBodyBlank(false);
     }
 
     function handlePost(e) {
         e.preventDefault();
         console.log('Clicked Post ...');
-        if (activity.name === "Activity" || !activity.name) {
+        let shouldPost = true;
+        if (activity.name === "Activity") {
             setActivityBlank(true);
-        } else {
-            setActivityBlank(false);
+            shouldPost = false;
         }
         if (title === "") {
             setTitleBlank(true);
-        } else {
-            setTitleBlank(false);
+            shouldPost = false;
         }
         if (body === "") {
             setBodyBlank(true);
-        } else {
-            setBodyBlank(false);
+            shouldPost = false;
         }
-        postPost();
+        if (shouldPost) {
+            postPost();
+        }
     };
     
     async function postPost() {
-        if (activityBlank === false && titleBlank === false && bodyBlank === false) {
-            console.log(`Creating post ...`)
+        console.log(`Creating post ...`)
+        try {
             const res = await axios.post("/api/posts", {
-                title,
+                title: title,
                 activity_type: activity.id,
-                body,
+                body: body,
                 user_id: userId
             });
             if (res.status === 201) {
@@ -87,8 +96,17 @@ export default function CreatePost({ history }) {
                 bodyInput.current.value = "";
                 history.push("/")
             }
+        } catch (err) {
+            if (err.response.status === 400) {
+                setAuthFailed(true);
+            }
         }
     };
+
+    function handleLogin() {
+        dispatch(logout());
+        history.push("/login");
+    }
 
     return (
         <div className="create-post-container">
@@ -139,9 +157,16 @@ export default function CreatePost({ history }) {
                     placeholder="Body"
                     onChange={updateBody}></input>
             </form>
-            <form className="create-post-form">
-                <input id="create-post-submit" type="button" value="Post" onClick={handlePost}></input>
-            </form>
+            {authFailed ? (
+                <form className="auth-failed-form">
+                    <label className="auth-failed-label" htmlFor="auth-failed-submit">Please re-authenticate: </label>
+                    <input id="auth-failed-submit" type="button" value="Login" onClick={handleLogin}></input>
+                </form>
+            ) : (
+                <form className="create-post-form">
+                    <input id="create-post-submit" type="button" value="Post" onClick={handlePost}></input>
+                </form>
+            )}
         </div>
     )
 }

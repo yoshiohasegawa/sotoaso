@@ -54,4 +54,8 @@
   vertical-align: middle;
   color: red;
 }
+
+.auth-failed-label {
+  color: red;
+}
 /*# sourceMappingURL=CreatePost.css.map */

@@ -22,7 +22,7 @@ export default function PostList() {
         <div className="post-list-container">
             {postList.map((post) => {
               return (
-                  <Post postId={post.id} title={post.title} activity={post.activity_name} user_id={post.user_id} key={post.id} />
+                  <Post postId={post.id} title={post.title} activity={post.activity_name} user_id={post.user_id} user={post.username} key={post.id} />
               )
             })}
         </div>
