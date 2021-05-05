@@ -18,7 +18,7 @@ export default function CreatePost({ history }) {
     }, [])
 
     const [activities, setActivities] = useState([]);
-    const [activity, setActivity] = useState({});
+    const [activity, setActivity] = useState({name: "Activity"});
     const [title, setTitle] = useState("");
     const [body, setBody] = useState("");
     const [activityBlank, setActivityBlank] = useState();
@@ -37,56 +37,60 @@ export default function CreatePost({ history }) {
             name: e.target.value
         };
         setActivity(updatedActivity);
+        setActivityBlank(false);
+        console.log(activityBlank);
     }
 
     function updateTitle(e) {
         e.preventDefault();
         const updatedTitle = e.target.value;
         setTitle(updatedTitle);
+        setTitleBlank(false);
+        console.log(titleBlank);
     }
 
     function updateBody(e) {
         e.preventDefault();
         const updatedBody = e.target.value;
         setBody(updatedBody);
+        setBodyBlank(false);
+        console.log(bodyBlank);
     }
 
     function handlePost(e) {
         e.preventDefault();
         console.log('Clicked Post ...');
-        if (activity.name === "Activity" || !activity.name) {
+        let shouldPost = true;
+        if (activity.name === "Activity") {
             setActivityBlank(true);
-        } else {
-            setActivityBlank(false);
+            shouldPost = false;
         }
         if (title === "") {
             setTitleBlank(true);
-        } else {
-            setTitleBlank(false);
+            shouldPost = false;
         }
         if (body === "") {
             setBodyBlank(true);
-        } else {
-            setBodyBlank(false);
+            shouldPost = false;
         }
-        postPost();
+        if (shouldPost) {
+            postPost();
+        }
     };
     
     async function postPost() {
-        if (activityBlank === false && titleBlank === false && bodyBlank === false) {
-            console.log(`Creating post ...`)
-            const res = await axios.post("/api/posts", {
-                title,
-                activity_type: activity.id,
-                body,
-                user_id: userId
-            });
-            if (res.status === 201) {
-                console.log(`${activity.name} post created!`)
-                titleInput.current.value = "";
-                bodyInput.current.value = "";
-                history.push("/")
-            }
+        console.log(`Creating post ...`)
+        const res = await axios.post("/api/posts", {
+            title: title,
+            activity_type: activity.id,
+            body: body,
+            user_id: userId
+        });
+        if (res.status === 201) {
+            console.log(`${activity.name} post created!`)
+            titleInput.current.value = "";
+            bodyInput.current.value = "";
+            history.push("/")
         }
     };
 
