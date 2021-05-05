@@ -1,38 +1,79 @@
-# In Development
+# sotoaso
 
-## Available Scripts
 
-In the project directory, you can run:
+## Description
+> This is a project folder for a blog created for the outdor enthusiast.
 
-### `npm start`
+___
+## Getting Started
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+To get started you will need to install dependencies:
+```console
+user@machine:~/sotoaso$ npm i 
+```
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+To continue with the following steps, it is imperative that you have environment variables setup:
+```console
+user@machine:~/sotoaso$ touch .env
+```
+In the `.env` file you will need to list the following variables:
+```bash
+DATABASE_LOCAL_URL=postgres://<username>:<password>@127.0.0.1:5432/<database_name>
+REACT_APP_ACCESS_TOKEN_SECRET=<hexideciml_string>
+```
+*Note: You will need to create a psql database on your local machine before running this project. Feel free to call it whatever you like and initialize it in the `.env` file.*
 
-### `npm test`
+To start the initial migrations run the following command:
+```console
+user@machine:~/sotoaso$ npm run migrate
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+In case you have to rollback you can run the following command: 
+```console
+user@machine:~/sotoaso$ npm run rollback
+```
 
-### `npm run build`
+To seed the database, run the following command:
+```console
+user@machine:~/sotoaso$ npm run seed
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Finally, to run the server and interact with the interface, run the following commands, in separate terminals:
+```console
+user@machine:~/sotoaso$ npm run serve
+```
+```console
+user@machine:~/sotoaso$ npm run dev
+```
+*Note: This project will run on `localhost:9000` and `localhost:3000`*
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+___
+## API Endpoints & Routes
+Currently, this project only contains Hike data which we can represent as Hike objects, with various properties. Please check back for further expansions to the database, API endpoints/routes and available objects.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Routes
+```/api/users/```
+- GET ```/```
+- GET ```/:id```
+- POST ```/signup```
+- POST ```/login```
+- POST ```/logout```
 
-### `npm run eject`
+```/api/posts/```
+- GET ```/```
+- GET ```/:id```
+- POST ```/```
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+```/api/activity-types/```
+- GET ```/```
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+___
+## Front-End Interface
+The user interface allows for users to view blog posts, sign-up, login, create a post and, logout.
+___
+## Contributors
+* Yoshio Hasegawa
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+## Support / Feedback / Bugs
+For support, feedback or, if you've found a bug you may contact the primary contributor here: [Yoshio Hasegawa](mailto:yoshio.seisuke.hasegawa@gmail.com).
