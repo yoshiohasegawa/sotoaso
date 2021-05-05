@@ -1,6 +1,10 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { logout } from "../../actions";
 import axios from "axios";
+// TODO: Implement PopUp for authFailed
+// import PopUp from "../PopUp/PopUp";
 import "../../styles/CreatePost.css";
 
 export default function CreatePost({ history }) {
@@ -27,6 +31,8 @@ export default function CreatePost({ history }) {
     const titleInput = useRef();
     const bodyInput = useRef();
     const userId = useSelector(state => state.userId);
+    const dispatch = useDispatch();
+    const [authFailed, setAuthFailed] = useState(false);
 
     function updateActivity(e) {
         e.preventDefault();
@@ -80,19 +86,31 @@ export default function CreatePost({ history }) {
     
     async function postPost() {
         console.log(`Creating post ...`)
-        const res = await axios.post("/api/posts", {
-            title: title,
-            activity_type: activity.id,
-            body: body,
-            user_id: userId
-        });
-        if (res.status === 201) {
-            console.log(`${activity.name} post created!`)
-            titleInput.current.value = "";
-            bodyInput.current.value = "";
-            history.push("/")
+        try {
+            const res = await axios.post("/api/posts", {
+                title: title,
+                activity_type: activity.id,
+                body: body,
+                user_id: userId
+            });
+            if (res.status === 201) {
+                console.log(`${activity.name} post created!`)
+                titleInput.current.value = "";
+                bodyInput.current.value = "";
+                history.push("/")
+            }
+        } catch (err) {
+            if (err.response.status === 400) {
+                console.log('here');
+                setAuthFailed(true);
+            }
         }
     };
+
+    function handleLogin() {
+        dispatch(logout());
+        history.push("/login");
+    }
 
     return (
         <div className="create-post-container">
@@ -143,9 +161,16 @@ export default function CreatePost({ history }) {
                     placeholder="Body"
                     onChange={updateBody}></input>
             </form>
-            <form className="create-post-form">
-                <input id="create-post-submit" type="button" value="Post" onClick={handlePost}></input>
-            </form>
+            {authFailed ? (
+                <form className="auth-failed-form">
+                    <label className="auth-failed-label" htmlFor="auth-failed-submit">Please re-authenticate: </label>
+                    <input id="auth-failed-submit" type="button" value="Login" onClick={handleLogin}></input>
+                </form>
+            ) : (
+                <form className="create-post-form">
+                    <input id="create-post-submit" type="button" value="Post" onClick={handlePost}></input>
+                </form>
+            )}
         </div>
     )
 }
