@@ -44,7 +44,6 @@ export default function CreatePost({ history }) {
         };
         setActivity(updatedActivity);
         setActivityBlank(false);
-        console.log(activityBlank);
     }
 
     function updateTitle(e) {
@@ -52,7 +51,6 @@ export default function CreatePost({ history }) {
         const updatedTitle = e.target.value;
         setTitle(updatedTitle);
         setTitleBlank(false);
-        console.log(titleBlank);
     }
 
     function updateBody(e) {
@@ -60,7 +58,6 @@ export default function CreatePost({ history }) {
         const updatedBody = e.target.value;
         setBody(updatedBody);
         setBodyBlank(false);
-        console.log(bodyBlank);
     }
 
     function handlePost(e) {
@@ -101,7 +98,6 @@ export default function CreatePost({ history }) {
             }
         } catch (err) {
             if (err.response.status === 400) {
-                console.log('here');
                 setAuthFailed(true);
             }
         }
