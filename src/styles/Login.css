@@ -1,0 +1,29 @@
+.login-form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  margin: 1vh;
+  padding: 1vh;
+}
+
+.login-label {
+  padding: 1vh;
+  font-size: 1.3em;
+}
+
+.login-input {
+  margin: 1vh;
+  width: 30vw;
+}
+
+#login-submit {
+  margin: 1vh;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+}
+/*# sourceMappingURL=Login.css.map */
