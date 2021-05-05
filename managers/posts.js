@@ -11,7 +11,10 @@ class PostManager {
             .join('activity_types',
                   'activity_types.id', 
                   'posts.activity_type')
-            .select('posts.*', 'activity_types.activity_name');
+            .join('users',
+                  'users.id',
+                  'posts.user_id')
+            .select('posts.*', 'activity_types.activity_name', 'users.username');
         return posts;
     };
 
