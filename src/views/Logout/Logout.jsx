@@ -17,7 +17,7 @@ export default function Logout({ history }) {
                 dispatch(logout());
                 dispatch(removeUserId());
                 // TODO: remove after resolving on page reload
-                // is successfully done with cookies
+                // is successfully done with cookies, or more secure way...
                 localStorage.removeItem("access-token");
                 localStorage.removeItem("user-id");
                 history.push("/");

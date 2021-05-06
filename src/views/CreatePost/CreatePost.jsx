@@ -98,6 +98,7 @@ export default function CreatePost({ history }) {
             }
         } catch (err) {
             if (err.response.status === 400) {
+                // TODO: Implement PopUp for authFailed
                 setAuthFailed(true);
             }
         }

@@ -1,8 +1,18 @@
 // TODO: authenticate user with cookies on page reload
+//       or, a more secure way...
+import jwt from "jsonwebtoken";
+
 let userAuthorized;
 const accessToken = localStorage.getItem("access-token");
-if (accessToken !== "undefined" && accessToken) {
-    userAuthorized = true;
+
+if (accessToken) {
+    jwt.verify(accessToken, process.env.REACT_APP_ACCESS_TOKEN_SECRET, (err) => {
+        if (err) {
+            userAuthorized = false;
+        } else {
+            userAuthorized = true;
+        }
+    })
 } else {
     userAuthorized = false;
 }

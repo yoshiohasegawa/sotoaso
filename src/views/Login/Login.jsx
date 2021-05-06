@@ -34,6 +34,7 @@ export default function Login({ history }) {
                 dispatch(login());
                 dispatch(saveUserId(res.data.id));
                 // TODO: remove and resolve with cookies on page reload
+                //       or, a more secure way...
                 localStorage.setItem("access-token", res.data.accessToken);
                 localStorage.setItem("user-id", res.data.id);
                 history.push("/")

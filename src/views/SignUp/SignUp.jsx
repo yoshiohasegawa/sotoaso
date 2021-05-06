@@ -54,7 +54,7 @@ export default function SignUp({ history }) {
             <h1> Please sign-up </h1>
             <form className="sign-up-form">
                 <label className="sign-up-label" htmlFor="sign-up-email">Email: </label>
-                <input id="sign-up-email" className="sign-up-input" ref={emailInput} type="text" placeholder="Email" onChange={updateEmail}></input>
+                <input id="sign-up-email" className="sign-up-input" ref={emailInput} type="email" placeholder="Email" onChange={updateEmail}></input>
                 <label className="sign-up-label" htmlFor="sign-up-username">Username: </label>
                 <input id="sign-up-username" className="sign-up-input" ref={usernameInput} type="text" placeholder="Username" onChange={updateUsername}></input>
                 <label className="sign-up-label" htmlFor="sign-up-password">Password: </label>
