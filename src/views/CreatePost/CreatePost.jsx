@@ -1,8 +1,11 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { logout } from "../../actions";
-import { userAuthenticated } from "../../utils";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
+import { userAuthenticated, toTitleCase } from "../../utils";
 import axios from "axios";
 // TODO: Implement PopUp for authFailed
 // import PopUp from "../PopUp/PopUp";
@@ -23,85 +26,37 @@ export default function CreatePost({ history }) {
     }, [])
 
     const [activities, setActivities] = useState([]);
-    const [activity, setActivity] = useState({name: "Activity"});
-    const [title, setTitle] = useState("");
-    const [body, setBody] = useState("");
-    const [activityBlank, setActivityBlank] = useState();
-    const [titleBlank, setTitleBlank] = useState();
-    const [bodyBlank, setBodyBlank] = useState();
-    const titleInput = useRef();
-    const bodyInput = useRef();
     const userId = useSelector(state => state.userId);
     const dispatch = useDispatch();
     const [authFailed, setAuthFailed] = useState(false);
 
-    function updateActivity(e) {
-        e.preventDefault();
-        const selectedIdx = e.target.options.selectedIndex
-        const activityId = parseInt(e.target.options[selectedIdx].getAttribute('data-key'));
-        const updatedActivity = {
-            id: activityId,
-            name: e.target.value
-        };
-        setActivity(updatedActivity);
-        setActivityBlank(false);
-    }
+    const schema = yup.object().shape ({
+        activity: yup.string().required(),
+        title: yup.string().required(),
+        body: yup.string().required()
+    });
 
-    function updateTitle(e) {
-        e.preventDefault();
-        const updatedTitle = e.target.value;
-        setTitle(updatedTitle);
-        setTitleBlank(false);
-    }
+    const {register, handleSubmit, formState: {errors, touchedFields}} = useForm({
+        resolver: yupResolver(schema)
+    });
 
-    function updateBody(e) {
-        e.preventDefault();
-        const updatedBody = e.target.value;
-        setBody(updatedBody);
-        setBodyBlank(false);
-    }
-
-    function handlePost(e) {
-        e.preventDefault();
-        console.log('Clicked Post ...');
-        let shouldPost = true;
-        if (activity.name === "Activity") {
-            setActivityBlank(true);
-            shouldPost = false;
-        }
-        if (title === "") {
-            setTitleBlank(true);
-            shouldPost = false;
-        }
-        if (body === "") {
-            setBodyBlank(true);
-            shouldPost = false;
-        }
-        if (shouldPost) {
-            postPost();
-        }
-    };
-    
-    async function postPost() {
+    async function postPost({activity, title, body}) {
         // TODO: Stick to one form of authentication.
         //       Currently, I authenticate on the front-end
         //       via localStoage access-token. Then,
         //       in the baack-end POST /api/posts authenticates
         //       via cookies access-token.
-        console.log(userAuthenticated());
         if (userAuthenticated()) {
             console.log(`Creating post ...`)
             try {
                 const res = await axios.post("/api/posts", {
                     title: title,
-                    activity_type: activity.id,
+                    activity_type: activity,
                     body: body,
                     user_id: userId
                 });
                 if (res.status === 201) {
-                    console.log(`${activity.name} post created!`)
-                    titleInput.current.value = "";
-                    bodyInput.current.value = "";
+                    console.log("Post published!")
                     history.push("/");
                 }
             } catch (err) {
@@ -114,6 +69,11 @@ export default function CreatePost({ history }) {
             setAuthFailed(true);
         }
     };
+    
+    function handlePost(data, e) {
+        e.preventDefault();
+        postPost(data);
+    };
 
     function handleLogin() {
         dispatch(logout());
@@ -123,60 +83,66 @@ export default function CreatePost({ history }) {
     return (
         <div className="create-post-container">
             <h1> Create a new post </h1>
-            {activityBlank && 
-                <div className="missing-container">
-                    <h4 className="create-post-missing">Please select a valid Activity:</h4>
-                </div>}
-            <label className="create-post-label" htmlFor="activity-select">Select an activity: 
-                <select id="activity-select" onChange={updateActivity}>
-                    <option defaultValue>{"Activity"}</option>
+            <form>
+                <label
+                    className="create-post-label"
+                    htmlFor="activity-select">Select an activity:
+                </label>
+                <select
+                    id="activity-select"
+                    defaultValue={undefined}
+                    {...register("activity")}>
+                    <option key="00" disabled={touchedFields.activity} value={undefined} label="Activity" ></option>
                     {activities.map((activity) => {
                         return (
                             <option
-                                value={activity.activity_name}
-                                key={activity.id} 
-                                data-key={activity.id}>
-                                    {activity.activity_name}
+                                key={activity.id}    
+                                value={activity.id}
+                                label={activity.activity_name}>
                             </option>
                         );
                     })}
                 </select>
-            </label>
-            {titleBlank &&
-                <div className="missing-container">
-                    <h4 className="create-post-missing">Please enter a Title:</h4>
-                </div>}
-            <form className="create-post-form">
-                <label className="create-post-label" htmlFor="create-post-title">Title: </label>
+                <p>{errors.activity && toTitleCase(errors.activity.message)}</p>
+                <label
+                    className="create-post-label"
+                    htmlFor="create-post-title">Title: </label>
                 <input 
                     id="create-post-title"
                     className="create-post-input"
-                    ref={titleInput}
+                    {...register("title")}
                     type="text"
-                    placeholder="Title" 
-                    onChange={updateTitle}></input>
-            </form>
-            {bodyBlank &&
-                <div className="missing-container">
-                    <h4 className="create-post-missing">Please enter a Body:</h4>
-                </div>}
-            <form className="create-post-form">
-                <label className="create-post-label" htmlFor="create-post-body">Body: </label>
+                    placeholder="Title"></input>
+                <p>{errors.title && toTitleCase(errors.title.message)}</p>
+                <label
+                    className="create-post-label"
+                    htmlFor="create-post-body">Body: </label>
                 <input id="create-post-body"
                     className="create-post-input"
-                    ref={bodyInput}
+                    {...register("body")}
                     type="text"
-                    placeholder="Body"
-                    onChange={updateBody}></input>
+                    placeholder="Body"></input>
+                <p>{errors.body && toTitleCase(errors.body.message)}</p>
             </form>
             {authFailed ? (
                 <form className="auth-failed-form">
-                    <label className="auth-failed-label" htmlFor="auth-failed-submit">Your session has ended, please re-authenticate: </label>
-                    <input id="auth-failed-submit" type="button" value="Login" onClick={handleLogin}></input>
+                    <label 
+                        className="auth-failed-label"
+                        htmlFor="auth-failed-submit">
+                            Your session has ended, please re-authenticate: </label>
+                    <input 
+                        id="auth-failed-submit"
+                        type="button"
+                        value="Login"
+                        onClick={handleLogin}></input>
                 </form>
             ) : (
                 <form className="create-post-form">
-                    <input id="create-post-submit" type="button" value="Post" onClick={handlePost}></input>
+                    <input 
+                        id="create-post-submit"
+                        type="button"
+                        value="Post"
+                        onClick={handleSubmit(handlePost)}></input>
                 </form>
             )}
         </div>

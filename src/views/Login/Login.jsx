@@ -13,7 +13,7 @@ export default function Login({ history }) {
 
     const schema = yup.object().shape ({
         username: yup.string().required(),
-        password: yup.string().min(4).max(16).required(),
+        password: yup.string().min(4).max(16).required()
     });
 
     const {register, handleSubmit, formState: {errors}} = useForm({
