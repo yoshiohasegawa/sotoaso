@@ -1,41 +1,28 @@
-import React, { useState, useRef } from "react";
+import React from "react";
 import axios from "axios";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
+import { toTitleCase } from "../../utils";
 import "../../styles/SignUp.css"
 
 export default function SignUp({ history }) {
-    const [email, setEmail] = useState();
-    const [username, setUsername] = useState();
-    const [password, setPassword] = useState();
-    const emailInput = useRef();
-    const usernameInput = useRef();
-    const passwordInput = useRef();
 
-    function updateEmail(e) {
-        e.preventDefault();
-        setEmail(e.target.value);
-    }
+    const schema = yup.object().shape ({
+        email: yup.string().email().required(),
+        username: yup.string().required(),
+        password: yup.string().min(4).max(16).required(),
+    });
 
-    function updateUsername(e) {
-        e.preventDefault();
-        setUsername(e.target.value);
-    }
+    const {register, handleSubmit, formState: {errors}} = useForm({
+        resolver: yupResolver(schema)
+    });
 
-    function updatePassword(e) {
-        e.preventDefault();
-        setPassword(e.target.value);
-    }
-
-    async function postUser() {
+    async function postUser({email, username, password}) {
         console.log(`Creating new user: ${username} ...`)
         try {
             const res = await axios.post("/api/users/signup", {email, username, password})
             console.log(`${res.data.username} created!`);
-            emailInput.current.value = "";
-            usernameInput.current.value = "";
-            passwordInput.current.value = "";
-            setEmail("");
-            setUsername("");
-            setPassword("");
             if (res.status === 201) {
                 history.push("/login")
             }
@@ -44,22 +31,50 @@ export default function SignUp({ history }) {
         }
     }
 
-    function handlePostUser(e) {
+    function handlePostUser(data, e) {
+        console.log(data);
         e.preventDefault();
-        postUser();
+        postUser(data);
     }
 
     return (
         <div className="sign-up-container">
             <h1> Please sign-up </h1>
-            <form className="sign-up-form">
-                <label className="sign-up-label" htmlFor="sign-up-email">Email: </label>
-                <input id="sign-up-email" className="sign-up-input" ref={emailInput} type="email" placeholder="Email" onChange={updateEmail}></input>
-                <label className="sign-up-label" htmlFor="sign-up-username">Username: </label>
-                <input id="sign-up-username" className="sign-up-input" ref={usernameInput} type="text" placeholder="Username" onChange={updateUsername}></input>
-                <label className="sign-up-label" htmlFor="sign-up-password">Password: </label>
-                <input id="sign-up-password" className="sign-up-input" ref={passwordInput} type="password" placeholder="Password" onChange={updatePassword}></input>
-                <input id="sign-up-submit" type="submit" value="Sign Up" onClick={handlePostUser}></input>
+            <form className="sign-up-form" onSubmit={handleSubmit(handlePostUser)}>
+                <label 
+                    className="sign-up-label"
+                    htmlFor="sign-up-email">Email: </label>
+                <input 
+                    id="sign-up-email" 
+                    className="sign-up-input"
+                    {...register("email")}
+                    type="text"
+                    placeholder="Email"></input>
+                <p>{errors.email && toTitleCase(errors.email.message)}</p>
+                <label 
+                    className="sign-up-label"
+                    htmlFor="sign-up-username">Username: </label>
+                <input 
+                    id="sign-up-username" 
+                    className="sign-up-input"
+                    {...register("username")}
+                    type="text"
+                    placeholder="Username"></input>
+                <p>{errors.username && toTitleCase(errors.username.message)}</p>
+                <label
+                    className="sign-up-label"
+                    htmlFor="sign-up-password">Password: </label>
+                <input
+                    id="sign-up-password"
+                    className="sign-up-input"
+                    {...register("password")}
+                    type="password"
+                    placeholder="Password"></input>
+                <p>{errors.password && toTitleCase(errors.password.message)}</p>
+                <input
+                    id="sign-up-submit"
+                    type="submit"
+                    value="Sign Up"></input>
             </form>
         </div>
     )
