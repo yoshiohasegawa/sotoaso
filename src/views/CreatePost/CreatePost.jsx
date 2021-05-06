@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { logout } from "../../actions";
+import { userAuthenticated } from "../../utils";
 import axios from "axios";
 // TODO: Implement PopUp for authFailed
 // import PopUp from "../PopUp/PopUp";
@@ -82,25 +83,35 @@ export default function CreatePost({ history }) {
     };
     
     async function postPost() {
-        console.log(`Creating post ...`)
-        try {
-            const res = await axios.post("/api/posts", {
-                title: title,
-                activity_type: activity.id,
-                body: body,
-                user_id: userId
-            });
-            if (res.status === 201) {
-                console.log(`${activity.name} post created!`)
-                titleInput.current.value = "";
-                bodyInput.current.value = "";
-                history.push("/")
+        // TODO: Stick to one form of authentication.
+        //       Currently, I authenticate on the front-end
+        //       via localStoage access-token. Then,
+        //       in the baack-end POST /api/posts authenticates
+        //       via cookies access-token.
+        console.log(userAuthenticated());
+        if (userAuthenticated()) {
+            console.log(`Creating post ...`)
+            try {
+                const res = await axios.post("/api/posts", {
+                    title: title,
+                    activity_type: activity.id,
+                    body: body,
+                    user_id: userId
+                });
+                if (res.status === 201) {
+                    console.log(`${activity.name} post created!`)
+                    titleInput.current.value = "";
+                    bodyInput.current.value = "";
+                    history.push("/");
+                }
+            } catch (err) {
+                if (err.response.status === 400) {
+                    // TODO: Implement PopUp for authFailed
+                    setAuthFailed(true);
+                }
             }
-        } catch (err) {
-            if (err.response.status === 400) {
-                // TODO: Implement PopUp for authFailed
-                setAuthFailed(true);
-            }
+        } else {
+            setAuthFailed(true);
         }
     };
 
@@ -160,7 +171,7 @@ export default function CreatePost({ history }) {
             </form>
             {authFailed ? (
                 <form className="auth-failed-form">
-                    <label className="auth-failed-label" htmlFor="auth-failed-submit">Please re-authenticate: </label>
+                    <label className="auth-failed-label" htmlFor="auth-failed-submit">Your session has ended, please re-authenticate: </label>
                     <input id="auth-failed-submit" type="button" value="Login" onClick={handleLogin}></input>
                 </form>
             ) : (
