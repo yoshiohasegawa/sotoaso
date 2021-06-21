@@ -1,79 +1,49 @@
-# sotoaso
+<!-- HEADER -->
+<p align="center">
+<!-- Logo -->
+    <!-- <img src="./assets/icon.png" alt="Savor Logo" width="300px" > -->
+    <h1 align="center">Sotoaso Blog</h1>
+<!-- Tagline -->
+    <p align="center">
+        <em>A blog made for the outdoor enthusiast</em>
+    <br/>
+    </p>
+<!-- Links -->
+    <p align="center">
+        <!-- <a href="">Sotoaso Blog</a> -->
+        Beta Coming Soon!
+        ·
+        <a href="https://github.com/yoshiohasegawa/sotoaso/issues">Report Bug</a>
+    </p>
+</p>
 
+<!-- BODY -->
+# Table of Contents
+1. [About](#about)
+    * [Tech Stack](#tech-stack)
+2. [Coming Soon](#coming-soon)
+    * [Custom MapBox Map](#custom-mapbox-map)
+4. [Contact](#contact)
 
-## Description
-> This is a project folder for a blog created for the outdor enthusiast.
+# About
+The purpose of this blog is for outdoor adventurists to share their activities with others. It can be difficult to find a nice running route, cycling destination or, a remote hike with beautiful views. This blog is geared towards making it easier to find and share peoples' favorite places to enjoy the outdoors. 
 
-___
-## Getting Started
+## Tech Stack
+- [JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
+- [React](https://reactjs.org/)
+- [Express](http://expressjs.com/)
+- [Knex](http://knexjs.org/)
+- [PostgreSQL](https://www.postgresql.org/)
+- [JWT](https://jwt.io/)
+- [MapBox](https://www.mapbox.com/) (Coming soon)
 
-To get started you will need to install dependencies:
-```console
-user@machine:~/sotoaso$ npm i 
-```
+# Coming Soon
+### Custom MapBox Map
+- MapBox map rendering via GPX upload on individual blog posts.
 
-To continue with the following steps, it is imperative that you have environment variables setup:
-```console
-user@machine:~/sotoaso$ touch .env
-```
-In the `.env` file you will need to list the following variables:
-```bash
-DATABASE_LOCAL_URL=postgres://<username>:<password>@127.0.0.1:5432/<database_name>
-REACT_APP_ACCESS_TOKEN_SECRET=<hexideciml_string>
-```
-*Note: You will need to create a psql database on your local machine before running this project. Feel free to call it whatever you like and initialize it in the `.env` file.*
+## Contact
+For support, feedback or, to report a bug, you may contact the maintainer:
+- Yoshio Hasegawa: [GitHub](https://github.com/yoshiohasegawa), [LinkedIn](https://www.linkedin.com/in/yoshiohasegawa/)
 
-To start the initial migrations run the following command:
-```console
-user@machine:~/sotoaso$ npm run migrate
-```
-
-In case you have to rollback you can run the following command: 
-```console
-user@machine:~/sotoaso$ npm run rollback
-```
-
-To seed the database, run the following command:
-```console
-user@machine:~/sotoaso$ npm run seed
-```
-
-Finally, to run the server and interact with the interface, run the following commands, in separate terminals:
-```console
-user@machine:~/sotoaso$ npm run serve
-```
-```console
-user@machine:~/sotoaso$ npm run dev
-```
-*Note: This project will run on `localhost:9000` and `localhost:3000`*
-
-___
-## API Endpoints & Routes
-Currently, this project only contains Hike data which we can represent as Hike objects, with various properties. Please check back for further expansions to the database, API endpoints/routes and available objects.
-
-### Routes
-```/api/users/```
-- GET ```/```
-- GET ```/:id```
-- POST ```/signup```
-- POST ```/login```
-- POST ```/logout```
-
-```/api/posts/```
-- GET ```/```
-- GET ```/:id```
-- POST ```/```
-
-```/api/activity-types/```
-- GET ```/```
-
-___
-## Front-End Interface
-The user interface allows for users to view blog posts, sign-up, login, create a post and, logout.
-___
-## Contributors
-* Yoshio Hasegawa
-
-
-## Support / Feedback / Bugs
-For support, feedback or, if you've found a bug you may contact the primary contributor here: [Yoshio Hasegawa](mailto:yoshio.seisuke.hasegawa@gmail.com).
+### License
+Distributed under the MIT License.
