@@ -10,10 +10,11 @@ export default function ProtectedRoute({component: Component, ...rest}) {
             (props) => {
                 if (userAuthenticated) {
                     return <Component {...props} />
-                } else {
+                } 
+                else {
                     return (
                         <Redirect to={{
-                            pathname: "/",
+                            pathname: "/login",
                             state: {
                                 from: props.location
                             }
