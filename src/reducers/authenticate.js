@@ -1,13 +1,8 @@
 // TODO: authenticate user with cookies on page reload
-let userAuthorized;
-const accessToken = localStorage.getItem("access-token");
-if (accessToken !== "undefined" && accessToken) {
-    userAuthorized = true;
-} else {
-    userAuthorized = false;
-}
+//       or, a more secure way. See function userAuthenticated()
+import { userAuthenticated } from "../utils";
 
-const authenticateReducer = (state = userAuthorized, action) => {
+const authenticateReducer = (state = userAuthenticated(), action) => {
     switch(action.type) {
         case "LOGIN":
             return true;
