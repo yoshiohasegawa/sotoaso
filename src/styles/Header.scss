@@ -3,29 +3,27 @@
     justify-content: space-between;
     padding: 1vh;
     margin: 1vh;
-    min-height: 5vh;
-    border-style: solid;
-    border-color: black;
+    min-height: 3vh;
+    max-height: 6vh;
+    background-color: #A9DBEF;
+    border-radius: 1vh;
 }
 
 .site-logo-container {
     display: flex;
     align-items: center;
     justify-content: center;
-    border-style: solid;
-    border-color: black;
     width: 25%;
 }
 
 .site-logo {
+    font-size: 50px;
 }
 
 .interact-container {
     display: flex;
     align-items: center;
     justify-content: space-around;
-    border-style: solid;
-    border-color: black;
     width: 25%;
 }
 
@@ -35,8 +33,15 @@
     }
 }
 
-.login-button {
+.link {
+    text-decoration: none;
+    color: #135B32;
 }
 
-.signup-button {
+.button {
+    padding: 0.3vh;
+    border-width: 1px;
+    border-style: solid;
+    border-radius: 1vh;
+    border-color: #135B32;
 }

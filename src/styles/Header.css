@@ -7,9 +7,10 @@
           justify-content: space-between;
   padding: 1vh;
   margin: 1vh;
-  min-height: 5vh;
-  border-style: solid;
-  border-color: black;
+  min-height: 3vh;
+  max-height: 6vh;
+  background-color: #A9DBEF;
+  border-radius: 1vh;
 }
 
 .site-logo-container {
@@ -22,9 +23,11 @@
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  border-style: solid;
-  border-color: black;
   width: 25%;
+}
+
+.site-logo {
+  font-size: 50px;
 }
 
 .interact-container {
@@ -36,8 +39,6 @@
           align-items: center;
   -ms-flex-pack: distribute;
       justify-content: space-around;
-  border-style: solid;
-  border-color: black;
   width: 25%;
 }
 
@@ -45,5 +46,18 @@
   .interact-container {
     width: 50%;
   }
+}
+
+.link {
+  text-decoration: none;
+  color: #135B32;
+}
+
+.button {
+  padding: 0.3vh;
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 1vh;
+  border-color: #135B32;
 }
 /*# sourceMappingURL=Header.css.map */
