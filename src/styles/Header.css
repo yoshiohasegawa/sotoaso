@@ -5,11 +5,9 @@
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
-  padding: 1vh;
   margin: 1vh;
-  min-height: 3vh;
-  max-height: 6vh;
-  background-color: #A9DBEF;
+  padding: 1vh;
+  background-color: #135B32;
   border-radius: 1vh;
 }
 
@@ -24,10 +22,6 @@
       -ms-flex-pack: center;
           justify-content: center;
   width: 25%;
-}
-
-.site-logo {
-  font-size: 50px;
 }
 
 .interact-container {
@@ -48,16 +42,20 @@
   }
 }
 
-.link {
+.logo-link {
+  font-size: 50px;
   text-decoration: none;
-  color: #135B32;
+  color: #9ACD32;
 }
 
-.button {
-  padding: 0.3vh;
+.link {
+  text-decoration: none;
+  color: #FFFFFF;
+  padding-left: 0.5vh;
+  padding-right: 0.5vh;
   border-width: 1px;
   border-style: solid;
   border-radius: 1vh;
-  border-color: #135B32;
+  border-color: #FFFFFF;
 }
 /*# sourceMappingURL=Header.css.map */

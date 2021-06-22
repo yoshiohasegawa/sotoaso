@@ -3,18 +3,14 @@
   width: 93vw;
   border-width: 1px;
   border-style: solid;
-  border-color: #135B32;
+  border-color: #000000;
   border-radius: 1vh;
-  background-color: #A9A9A9;
-}
-
-.link {
-  text-decoration: none;
+  background-color: #D3D3D3;
 }
 
 .title {
   font-size: 30px;
   text-decoration: none;
-  color: #FFFFFF;
+  color: #000000;
 }
 /*# sourceMappingURL=Post.css.map */

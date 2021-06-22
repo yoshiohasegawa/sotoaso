@@ -9,26 +9,26 @@ export default function Header() {
     return (
         <div className="header-container">
             <div className="site-logo-container">
-                <Link className="link" to="/">
-                    <h3 className="site-logo">sotoaso</h3>
+                <Link className="logo-link" to="/">
+                    sotoaso
                 </Link>
             </div>
             {userAuthenticated ? (
                 <div className="interact-container">
                     <Link className="link" to="/create-post">
-                            <h3 className="button">Create Post</h3>
+                        Create Post
                     </Link>
                     <Link className="link" to="/logout">
-                        <h3 className="button">Logout</h3>
+                        Logout
                     </Link>
                 </div>
             ) : (
                 <div className="interact-container">
                     <Link className="link" to="/login">
-                        <h3 className="button">Login</h3>
+                        Login
                     </Link>
                     <Link className="link" to="signup">
-                        <h3 className="button">SignUp </h3>
+                        SignUp 
                     </Link>
                 </div>
             )}
