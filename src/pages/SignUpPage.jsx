@@ -3,10 +3,10 @@ import axios from "axios";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { toTitleCase } from "../../utils";
-import "../../styles/SignUp.css"
+import { toTitleCase } from "../utils";
+import "../styles/SignUp.css"
 
-export default function SignUp({ history }) {
+export default function SignUpPage({ history }) {
 
     const schema = yup.object().shape ({
         email: yup.string().email().required(),

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Post from "./Post";
 import axios from "axios";
-import "../../../styles/PostList.css"
+import "../styles/PostList.css"
 
 export default function PostList() {
     const [postList, setPostsList] = useState([]);

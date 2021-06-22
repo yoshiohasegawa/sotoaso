@@ -1,17 +1,17 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { logout } from "../../actions";
+import { logout } from "../actions";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { userAuthenticated, toTitleCase } from "../../utils";
+import { userAuthenticated, toTitleCase } from "../utils";
 import axios from "axios";
 // TODO: Implement PopUp for authFailed
 // import PopUp from "../PopUp/PopUp";
-import "../../styles/CreatePost.css";
+import "../styles/CreatePost.css";
 
-export default function CreatePost({ history }) {
+export default function CreatePostPage({ history }) {
     async function fetchActivityTypes() {
         try {
             const res = await axios.get("/api/activity-types");

@@ -1,8 +1,8 @@
 import React from "react";
-import PostList from "./components/PostList";
-import "../../styles/Feed.css";
+import PostList from "../components/PostList";
+import "../styles/Feed.css";
 
-export default function Feed() {
+export default function FeedPage() {
     return (
         <div className="feed-container">
             <PostList />

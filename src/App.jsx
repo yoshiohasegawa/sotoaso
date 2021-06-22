@@ -1,12 +1,12 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Header from "./components/Header";
-import Feed from "./views/Feed/Feed";
-import Login from "./views/Login/Login";
-import SignUp from "./views/SignUp/SignUp";
-import CreatePost from "./views/CreatePost/CreatePost";
-import Logout from "./views/Logout/Logout";
-import PostDetail from "./views/PostDetail/PostDetail";
+import FeedPage from "./pages/FeedPage";
+import LoginPage from "./pages/LoginPage";
+import SignUpPage from "./pages/SignUpPage";
+import CreatePostPage from "./pages/CreatePostPage";
+import LogoutPage from "./pages/LogoutPage";
+import PostDetailPage from "./pages/PostDetailPage";
 import ProtectedRoute from "./components/ProtectedRoute";
 
 export default function App() {
@@ -15,12 +15,12 @@ export default function App() {
       <div className="app-container">
         <Header />
         <Switch>
-          <Route path="/" exact component={Feed} />
-          <Route path="/login" exact component={Login} />
-          <Route path="/signup" exact component={SignUp} />
-          <ProtectedRoute path="/create-post" exact component={CreatePost} />
-          <Route path="/logout" exact component={Logout} />
-          <Route path="/post/:id" exact component={PostDetail} />
+          <Route path="/" exact component={FeedPage} />
+          <Route path="/login" exact component={LoginPage} />
+          <Route path="/signup" exact component={SignUpPage} />
+          <ProtectedRoute path="/create-post" exact component={CreatePostPage} />
+          <Route path="/logout" exact component={LogoutPage} />
+          <Route path="/post/:id" exact component={PostDetailPage} />
           <Route path="*" component={() => (<h1 className="404">404 NOT FOUND</h1>)}/>
         </Switch>
       </div>
