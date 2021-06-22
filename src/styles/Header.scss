@@ -5,26 +5,22 @@
     padding: 1vh;
     background-color: #135B32;
     border-radius: 1vh;
+    box-shadow: -5px 5px 9px #767676;
+
 }
 
 .site-logo-container {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 25%;
+    margin-left: 3vh;
 }
 
 .interact-container {
     display: flex;
     align-items: center;
     justify-content: space-around;
-    width: 25%;
-}
-
-@media (max-width: 600px) {
-    .interact-container {
-        width: 50%;
-    }
+    margin-right: 3vh;
 }
 
 .logo-link {
@@ -37,6 +33,8 @@
     font-size: 24px;
     text-decoration: none;
     color: #FFFFFF;
+    margin-left: 0.5vh;
+    margin-right: 0.5vh;
     padding-left: 0.5vh;
     padding-right: 0.5vh;
     border-width: 1px;
