@@ -5,11 +5,7 @@
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
-  padding: 1vh;
-  margin: 1vh;
-  min-height: 5vh;
-  border-style: solid;
-  border-color: black;
+  background-color: #135B32;
 }
 
 .site-logo-container {
@@ -22,9 +18,7 @@
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  border-style: solid;
-  border-color: black;
-  width: 25%;
+  margin-left: 1vw;
 }
 
 .interact-container {
@@ -36,14 +30,20 @@
           align-items: center;
   -ms-flex-pack: distribute;
       justify-content: space-around;
-  border-style: solid;
-  border-color: black;
-  width: 25%;
+  margin-right: 1vw;
 }
 
-@media (max-width: 600px) {
-  .interact-container {
-    width: 50%;
-  }
+.logo-link {
+  font-size: 50px;
+  text-decoration: none;
+  color: #c3fa56;
+}
+
+.link {
+  font-size: 24px;
+  text-decoration: none;
+  color: #FFFFFF;
+  margin-left: 0.5vw;
+  margin-right: 0.5vw;
 }
 /*# sourceMappingURL=Header.css.map */

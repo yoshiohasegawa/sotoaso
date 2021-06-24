@@ -1,8 +1,15 @@
 .post-container {
-  margin: 3vh;
-  padding: 1vh;
-  width: 79vw;
-  border-style: solid;
-  border-color: black;
+  padding-left: 1vh;
+  width: 93vw;
+  border-radius: 1vh;
+  background-color: #A9DBEF;
+  -webkit-box-shadow: -3px 5px 9px #C0C0C0;
+          box-shadow: -3px 5px 9px #C0C0C0;
+}
+
+.title {
+  font-size: 30px;
+  text-decoration: none;
+  color: #000000;
 }
 /*# sourceMappingURL=Post.css.map */

@@ -6,8 +6,6 @@
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  margin: 1vh;
-  border-style: solid;
-  border-color: black;
+  margin-top: 3vh;
 }
 /*# sourceMappingURL=Feed.css.map */

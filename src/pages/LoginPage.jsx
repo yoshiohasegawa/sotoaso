@@ -1,14 +1,14 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { login, saveUserId } from "../../actions";
+import { login, saveUserId } from "../actions";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { toTitleCase } from "../../utils";
+import { toTitleCase } from "../utils";
 import axios from "axios";
-import "../../styles/Login.css"
+import "../styles/Login.css"
 
-export default function Login({ history }) {
+export default function LoginPage({ history }) {
     const dispatch = useDispatch();
 
     const schema = yup.object().shape ({

@@ -1,9 +1,9 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { logout, removeUserId } from "../../actions";
+import { logout, removeUserId } from "../actions";
 import axios from "axios";
 
-export default function Logout({ history }) {
+export default function LogoutPage({ history }) {
     const dispatch = useDispatch();
 
     async function logoutUser() {

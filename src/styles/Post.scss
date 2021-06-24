@@ -1,7 +1,16 @@
 .post-container {
-    margin: 3vh;
-    padding: 1vh;
-    width: 79vw;
-    border-style: solid;
-    border-color: black;
+    padding-left: 1vh;
+    width: 93vw;
+    // border-width: 1px;
+    // border-style: solid;
+    // border-color: #000000;
+    border-radius: 1vh;
+    background-color: #A9DBEF;
+    box-shadow: -3px 5px 9px #C0C0C0;
+}
+
+.title {
+    font-size: 30px;
+    text-decoration: none;
+    color: #000000;
 }
