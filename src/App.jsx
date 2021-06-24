@@ -12,7 +12,6 @@ import ProtectedRoute from "./components/ProtectedRoute";
 export default function App() {
   return (
     <Router>
-      <div className="app-container">
         <Header />
         <Switch>
           <Route path="/" exact component={FeedPage} />
@@ -23,7 +22,6 @@ export default function App() {
           <Route path="/post/:id" exact component={PostDetailPage} />
           <Route path="*" component={() => (<h1 className="404">404 NOT FOUND</h1>)}/>
         </Switch>
-      </div>
     </Router>
   );
 }
