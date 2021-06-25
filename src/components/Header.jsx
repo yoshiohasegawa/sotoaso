@@ -15,19 +15,19 @@ export default function Header() {
             </div>
             {userAuthenticated ? (
                 <div className="interact-container">
-                    <Link className="link" to="/create-post">
+                    <Link className="header-link" to="/create-post">
                         Create Post
                     </Link>
-                    <Link className="link" to="/logout">
+                    <Link className="header-link" to="/logout">
                         Logout
                     </Link>
                 </div>
             ) : (
                 <div className="interact-container">
-                    <Link className="link" to="/login">
+                    <Link className="header-link" to="/login">
                         Login
                     </Link>
-                    <Link className="link" to="signup">
+                    <Link className="header-link" to="signup">
                         SignUp 
                     </Link>
                 </div>

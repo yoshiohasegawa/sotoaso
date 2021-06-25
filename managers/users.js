@@ -13,15 +13,16 @@ class UserManager {
         const salt = await bcrypt.genSalt();
         const hashed = await bcrypt.hash(req.body.password, salt);
         const user = {email: req.body.email, username: req.body.username, password: hashed};
-        const [createdUser] = await db("users").insert(user).returning(["email", "username"]);
-        return createdUser;
+        await db("users").insert(user);
+
+        const loggedInUser = await this.loginUser({body: {username: req.body.username, password: req.body.password}});
+        return loggedInUser;
     };
 
     async loginUser(req) {
         const user = await db("users").where({username: req.body.username}).first();
         if (user) {
             if (await bcrypt.compare(req.body.password, user.password)) {
-                // TODO: Create a refresh token & tell user when accessToken is no longer valid
                 const accessToken = jwt.sign(user, process.env.REACT_APP_ACCESS_TOKEN_SECRET, {expiresIn: 600});
                 const response = {id: user.id, email: user.email, username: user.username, accessToken, auth: true};
                 return response;

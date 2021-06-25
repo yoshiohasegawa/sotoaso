@@ -1,8 +1,7 @@
-// TODO: authenticate user with cookies on page reload
-//       or, a more secure way. See function userAuthenticated()
 import { userAuthenticated } from "../utils";
 
-const authenticateReducer = (state = userAuthenticated(), action) => {
+const initialState = userAuthenticated()
+const authenticateReducer = (state = initialState, action) => {
     switch(action.type) {
         case "LOGIN":
             return true;

@@ -1,4 +1,3 @@
-// TODO: Get userId with cookies on page reload
 let userId = localStorage.getItem("user-id");
 if (userId === "undefined" || !userId) {
     userId = "";
