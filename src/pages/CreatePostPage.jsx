@@ -84,7 +84,7 @@ export default function CreatePostPage({ history }) {
 
   return (
     <div className="create-post-container">
-      <h1> Create a new post </h1>
+      <h1 className="create-post-title"> Create a new post </h1>
       <form>
         <label className="create-post-label" htmlFor="activity-select">
           Select an activity:
@@ -110,7 +110,7 @@ export default function CreatePostPage({ history }) {
             );
           })}
         </select>
-        <p>{errors.activity && toTitleCase(errors.activity.message)}</p>
+        <p className="error-message">{errors.activity && toTitleCase(errors.activity.message)}</p>
         <label className="create-post-label" htmlFor="create-post-title">
           Title:{" "}
         </label>
@@ -121,7 +121,7 @@ export default function CreatePostPage({ history }) {
           type="text"
           placeholder="Title"
         ></input>
-        <p>{errors.title && toTitleCase(errors.title.message)}</p>
+        <p className="error-message">{errors.title && toTitleCase(errors.title.message)}</p>
         <label className="create-post-label" htmlFor="create-post-body">
           Body:{" "}
         </label>
@@ -132,7 +132,7 @@ export default function CreatePostPage({ history }) {
           type="text"
           placeholder="Body"
         ></input>
-        <p>{errors.body && toTitleCase(errors.body.message)}</p>
+        <p className="error-message">{errors.body && toTitleCase(errors.body.message)}</p>
       </form>
       {authFailed ? (
         <form className="auth-failed-form">

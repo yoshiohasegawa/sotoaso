@@ -2,6 +2,7 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { logout, removeUserId } from "../actions";
 import axios from "axios";
+import "../styles/Logout.css"
 
 export default function LogoutPage({ history }) {
     const dispatch = useDispatch();
@@ -34,8 +35,7 @@ export default function LogoutPage({ history }) {
 
     return (
         <div className="logout-container">
-            <h1> Logout Page </h1>
-            <h3>Are you sure?</h3>
+            <h2>Are you sure?</h2>
             <form>
                 <input id="logout-submit" type="submit" value="Logout" onClick={handleLogoutUser}></input>
             </form>
