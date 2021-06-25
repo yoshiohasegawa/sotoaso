@@ -1,12 +1,15 @@
 import React from "react";
+import { useDispatch } from "react-redux";
+import { login, saveUserId } from "../actions";
 import axios from "axios";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { toTitleCase } from "../../utils";
-import "../../styles/SignUp.css"
+import { toTitleCase } from "../utils";
+import "../styles/SignUp.css"
 
-export default function SignUp({ history }) {
+export default function SignUpPage({ history }) {
+    const dispatch = useDispatch();
 
     const schema = yup.object().shape ({
         email: yup.string().email().required(),
@@ -23,8 +26,13 @@ export default function SignUp({ history }) {
         try {
             const res = await axios.post("/api/users/signup", {email, username, password})
             console.log(`${res.data.username} created!`);
-            if (res.status === 201) {
-                history.push("/login")
+            if (res.data.auth) {
+                console.log(`${res.data.username} logged In!`);
+                dispatch(login());
+                dispatch(saveUserId(res.data.id));
+                localStorage.setItem("access-token", res.data.accessToken);
+                localStorage.setItem("user-id", res.data.id);
+                history.push("/")
             }
         } catch (err) {
             console.error("That username or email already exists...");
@@ -32,7 +40,6 @@ export default function SignUp({ history }) {
     }
 
     function handlePostUser(data, e) {
-        console.log(data);
         e.preventDefault();
         postUser(data);
     }

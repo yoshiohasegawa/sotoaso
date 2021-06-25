@@ -1,14 +1,14 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { login, saveUserId } from "../../actions";
+import { login, saveUserId } from "../actions";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { toTitleCase } from "../../utils";
+import { toTitleCase } from "../utils";
 import axios from "axios";
-import "../../styles/Login.css"
+import "../styles/Login.css"
 
-export default function Login({ history }) {
+export default function LoginPage({ history }) {
     const dispatch = useDispatch();
 
     const schema = yup.object().shape ({
@@ -26,12 +26,8 @@ export default function Login({ history }) {
             const res = await axios.post("/api/users/login", {username, password})
             if (res.data.auth) {
                 console.log(`${res.data.username} logged In!`);
-                // set store.authentication = true
-                // set store.userId = res.data.id
                 dispatch(login());
                 dispatch(saveUserId(res.data.id));
-                // TODO: remove and resolve with cookies on page reload
-                //       or, a more secure way...
                 localStorage.setItem("access-token", res.data.accessToken);
                 localStorage.setItem("user-id", res.data.id);
                 history.push("/")
