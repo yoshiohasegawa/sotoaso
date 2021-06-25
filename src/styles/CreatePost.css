@@ -6,11 +6,12 @@
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  padding: 1vh;
-  margin: 1vh;
-  min-height: 5vh;
-  border-style: solid;
-  border-color: black;
+  margin: 1vw;
+}
+
+.create-post-title {
+  margin: 0px;
+  margin-bottom: 3vh;
 }
 
 #activity-select {
@@ -25,12 +26,10 @@
       -ms-flex-pack: justify;
           justify-content: space-between;
   padding: 1vh;
-  margin: 1vh;
 }
 
 .create-post-label {
   margin: auto;
-  padding: 1vh;
   font-size: 1.3em;
 }
 
@@ -42,12 +41,8 @@
   height: 25vh;
 }
 
-.missing-container {
-  text-align: center;
-  height: -webkit-min-content;
-  height: -moz-min-content;
-  height: min-content;
-  background-color: rgba(255, 0, 0, 0.4);
+.error-message {
+  color: red;
 }
 
 .create-post-missing {
